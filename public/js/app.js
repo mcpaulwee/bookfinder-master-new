@@ -11803,7 +11803,7 @@ module.exports = (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(85);
+module.exports = __webpack_require__(90);
 
 
 /***/ }),
@@ -11869,28 +11869,28 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('category', __webpack_requ
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('items', __webpack_require__(63));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('footers', __webpack_require__(65));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('login', __webpack_require__(67));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('register', __webpack_require__(69));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('sell', __webpack_require__(72));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('quickitemview', __webpack_require__(93));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('register', __webpack_require__(70));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('post-book', __webpack_require__(97));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('quickitemview', __webpack_require__(75));
 
 var routes = [{
     path: '/',
-    component: __webpack_require__(74)
+    component: __webpack_require__(77)
 }, {
     path: '/login',
-    component: __webpack_require__(76),
+    component: __webpack_require__(79),
     name: 'login'
 }, {
     path: '/register',
-    component: __webpack_require__(78),
+    component: __webpack_require__(81),
     name: 'register'
 }, {
-    path: '/sell',
-    component: __webpack_require__(80),
-    name: 'sell'
+    path: '/post',
+    component: __webpack_require__(95),
+    name: 'post'
 }, {
     path: '/viewItem',
-    component: __webpack_require__(91),
+    component: __webpack_require__(85),
     name: 'viewItem'
 }];
 
@@ -11959,9 +11959,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_3_vue_router__["a" /* default */]({ r
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.router = router;
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__webpack_require__(12), {
-    auth: __webpack_require__(82),
-    http: __webpack_require__(83),
-    router: __webpack_require__(84),
+    auth: __webpack_require__(87),
+    http: __webpack_require__(88),
+    router: __webpack_require__(89),
     rolesVar: 'role_type',
     tokenName: 'token',
     authRedirect: {
@@ -55334,7 +55334,6 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("input", {
-        staticClass: "form-control form-control-sm",
         class: _vm.inputClass,
         attrs: { type: "file", id: _vm.id },
         on: {
@@ -55560,9 +55559,9 @@ var render = function() {
             "div",
             { staticClass: "cart" },
             [
-              _c("router-link", { attrs: { to: "sell" } }, [
+              _c("router-link", { attrs: { to: "post" } }, [
                 _c("span", [_c("i", { staticClass: "fa fa-usd fa-lg" })]),
-                _vm._v("SELL")
+                _vm._v("POST")
               ])
             ],
             1
@@ -56317,9 +56316,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(90)
+var __vue_script__ = __webpack_require__(68)
 /* template */
-var __vue_template__ = __webpack_require__(68)
+var __vue_template__ = __webpack_require__(69)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -56360,6 +56359,84 @@ module.exports = Component.exports
 
 /***/ }),
 /* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var link = 'http://localhost:8000/';
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {},
+    data: function data() {
+        return {
+            data: {
+                password: null,
+                email: null
+            },
+            errors: {}
+        };
+    },
+
+
+    methods: {
+        login: function login() {
+            var _this = this;
+
+            this.$auth.login({
+                data: this.data, // data: {} in Axios
+                success: function success(res) {
+
+                    switch (res.data.user.role_type) {
+                        case 'ADMIN':
+                            _this.$router.replace({ 'name': 'admin-dashboard' });break;
+                        case 'NORMAL':
+                            _this.$router.replace({ 'name': 'user-dashboard' });break;
+                        default:
+                            break;
+
+                    }
+                },
+                error: function error(e) {
+                    _this.errors = e.response.data;
+                },
+                redirect: false,
+                fetchUser: false
+            });
+        },
+        updateModel: function updateModel(value) {
+            this.$emit('input', value);
+        }
+    }
+
+});
+
+/***/ }),
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -56367,7 +56444,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: " login-right" }, [
+    _c("div", {}, [
       _c("h3", [_vm._v("REGISTERED USERS")]),
       _vm._v(" "),
       _c("p", [_vm._v("If you have an account with us, please log in.")]),
@@ -56434,7 +56511,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: " login-left" },
+      {},
       [
         _c("h3", [_vm._v("NEW USERS")]),
         _vm._v(" "),
@@ -56467,15 +56544,15 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(70)
+var __vue_script__ = __webpack_require__(71)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(72)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -56515,7 +56592,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56602,7 +56679,7 @@ var link = 'http://localhost:8000/';
 });
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -56821,7 +56898,9 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 73 */,
+/* 74 */,
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -56829,7 +56908,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(73)
+var __vue_template__ = __webpack_require__(76)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -56846,7 +56925,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\home\\sell-form.vue"
+Component.options.__file = "resources\\assets\\js\\home\\item-view.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -56856,9 +56935,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2d971ce1", Component.options)
+    hotAPI.createRecord("data-v-5cf56fa1", Component.options)
   } else {
-    hotAPI.reload("data-v-2d971ce1", Component.options)
+    hotAPI.reload("data-v-5cf56fa1", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -56869,52 +56948,21 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "register-top-grid" },
-      [
-        _c("h3", [_vm._v("BOOK INFORMATION")]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c("router-link", { staticClass: "acount-btn", attrs: { to: "#" } }, [
-          _vm._v(" POST")
-        ])
-      ],
-      1
-    )
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mation" }, [
-      _c("span", [_vm._v("Book Name"), _c("label", [_vm._v("*")])]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text" } }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Original Price"), _c("label", [_vm._v("*")])]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text" } }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Selling Price"), _c("label", [_vm._v("*")])]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text" } }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Year Published"), _c("label", [_vm._v("*")])]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "text" } })
-    ])
+    return _c("div", [_c("h3", [_vm._v("View this item")])])
   }
 ]
 render._withStripped = true
@@ -56922,12 +56970,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2d971ce1", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5cf56fa1", module.exports)
   }
 }
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -56935,7 +56983,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(75)
+var __vue_template__ = __webpack_require__(78)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -56975,7 +57023,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 75 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -57022,7 +57070,7 @@ if (false) {
 }
 
 /***/ }),
-/* 76 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -57030,7 +57078,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(77)
+var __vue_template__ = __webpack_require__(80)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -57070,7 +57118,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 77 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -57117,7 +57165,7 @@ if (false) {
 }
 
 /***/ }),
-/* 78 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -57125,7 +57173,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(79)
+var __vue_template__ = __webpack_require__(82)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -57165,7 +57213,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 79 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -57212,7 +57260,9 @@ if (false) {
 }
 
 /***/ }),
-/* 80 */
+/* 83 */,
+/* 84 */,
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -57220,7 +57270,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(81)
+var __vue_template__ = __webpack_require__(86)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -57237,7 +57287,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\home\\sell.vue"
+Component.options.__file = "resources\\assets\\js\\home\\view-item.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -57247,9 +57297,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6a010180", Component.options)
+    hotAPI.createRecord("data-v-a27d2486", Component.options)
   } else {
-    hotAPI.reload("data-v-6a010180", Component.options)
+    hotAPI.reload("data-v-a27d2486", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -57260,7 +57310,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 81 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -57278,7 +57328,7 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-4" }, [_c("category")], 1),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-8" }, [_c("sell")], 1)
+          _c("div", { staticClass: "col-md-8" }, [_c("quickitemview")], 1)
         ])
       ]),
       _vm._v(" "),
@@ -57302,12 +57352,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6a010180", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-a27d2486", module.exports)
   }
 }
 
 /***/ }),
-/* 82 */
+/* 87 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -57329,7 +57379,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 83 */
+/* 88 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -57391,7 +57441,7 @@ module.exports = {
 
 
 /***/ }),
-/* 84 */
+/* 89 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -57459,17 +57509,318 @@ module.exports = {
 };
 
 /***/ }),
-/* 85 */
+/* 90 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(96)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\post\\post.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1b021226", Component.options)
+  } else {
+    hotAPI.reload("data-v-1b021226", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("navbar"),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-4" }, [_c("category")], 1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-8" }, [_c("post-book")], 1)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [_c("footers")], 1)
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12", staticStyle: { height: "15px" } })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1b021226", module.exports)
+  }
+}
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(99)
+/* template */
+var __vue_template__ = __webpack_require__(98)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\post\\post-form.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-15606954", Component.options)
+  } else {
+    hotAPI.reload("data-v-15606954", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h3", [_vm._v("BOOK INFORMATION")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          [
+            _c("bs-input", {
+              attrs: {
+                error: _vm.errors.title,
+                type: "text",
+                id: "bookname",
+                label: "Book name",
+                "input-class": "input-sm"
+              },
+              model: {
+                value: _vm.data.title,
+                callback: function($$v) {
+                  _vm.$set(_vm.data, "title", $$v)
+                },
+                expression: "data.title"
+              }
+            }),
+            _vm._v(" "),
+            _c("bs-input", {
+              attrs: {
+                error: _vm.errors.author,
+                type: "text",
+                id: "author",
+                label: "Author",
+                "input-class": "input-sm"
+              },
+              model: {
+                value: _vm.data.author,
+                callback: function($$v) {
+                  _vm.$set(_vm.data, "author", $$v)
+                },
+                expression: "data.author"
+              }
+            }),
+            _vm._v(" "),
+            _c("bs-input", {
+              attrs: {
+                error: _vm.errors.year,
+                type: "text",
+                id: "year",
+                label: "Year",
+                "input-class": "input-sm"
+              },
+              model: {
+                value: _vm.data.year,
+                callback: function($$v) {
+                  _vm.$set(_vm.data, "year", $$v)
+                },
+                expression: "data.year"
+              }
+            }),
+            _vm._v(" "),
+            _c("bs-input", {
+              attrs: {
+                error: _vm.errors.price,
+                type: "number",
+                id: "year",
+                label: "price",
+                "input-class": "input-sm"
+              },
+              model: {
+                value: _vm.data.price,
+                callback: function($$v) {
+                  _vm.$set(_vm.data, "price", $$v)
+                },
+                expression: "data.price"
+              }
+            }),
+            _vm._v(" "),
+            _c("bs-input", {
+              attrs: {
+                error: _vm.errors.IBSN,
+                type: "text",
+                id: "IBSN",
+                label: "IBSN",
+                "input-class": "input-sm"
+              },
+              model: {
+                value: _vm.data.IBSN,
+                callback: function($$v) {
+                  _vm.$set(_vm.data, "IBSN", $$v)
+                },
+                expression: "data.IBSN"
+              }
+            }),
+            _vm._v(" "),
+            _c("bs-text", {
+              attrs: {
+                error: _vm.errors.description,
+                id: "description",
+                label: "Description",
+                "input-class": "input-sm"
+              },
+              model: {
+                value: _vm.data.description,
+                callback: function($$v) {
+                  _vm.$set(_vm.data, "description", $$v)
+                },
+                expression: "data.description"
+              }
+            }),
+            _vm._v(" "),
+            _c("bs-file", {
+              attrs: {
+                error: _vm.errors.image,
+                id: "year",
+                label: "Book Image"
+              },
+              model: {
+                value: _vm.data.image,
+                callback: function($$v) {
+                  _vm.$set(_vm.data, "image", $$v)
+                },
+                expression: "data.image"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger ",
+                attrs: { type: "button" },
+                on: { click: _vm.submit }
+              },
+              [_vm._v("POST")]
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-15606954", module.exports)
+  }
+}
+
+/***/ }),
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57498,223 +57849,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
-var link = 'http://localhost:8000/';
 /* harmony default export */ __webpack_exports__["default"] = ({
-
     props: {},
     data: function data() {
         return {
             data: {
-                password: null,
-                email: null
+                title: null,
+                description: null,
+                image: null,
+                author: null,
+                year: null,
+                price: null,
+                IBSN: null
+
             },
-            errors: {}
+            formData: new FormData()
         };
     },
 
-
     methods: {
-        login: function login() {
+        submit: function submit() {
             var _this = this;
 
-            this.$auth.login({
-                data: this.data, // data: {} in Axios
-                success: function success(res) {
+            // this.$emit('user-posted', 'jack shit');
+            // return;
 
-                    switch (res.data.user.role_type) {
-                        case 'ADMIN':
-                            _this.$router.replace({ 'name': 'admin-dashboard' });break;
-                        case 'NORMAL':
-                            _this.$router.replace({ 'name': 'user-dashboard' });break;
-                        default:
-                            break;
-
-                    }
-                },
-                error: function error(e) {
-                    _this.errors = e.response.data;
-                },
-                redirect: false,
-                fetchUser: false
+            Vue.axios.post('post', this.formData).then(function (res) {
+                _this.$emit('user-posted');
+            }).catch(function (e) {
+                _this.errors = e.response.data;
             });
+        }
+    },
+    watch: {
+        'data.title': function dataTitle(val) {
+            this.formData.set('title', val);
         },
-        updateModel: function updateModel(value) {
-            this.$emit('input', value);
+        'data.description': function dataDescription(val) {
+            this.formData.set('description', val);
+        },
+        'data.image': function dataImage(val) {
+            this.formData.set('image', val);
+            // this.formData.set('title', val);
+        },
+        'data.author': function dataAuthor(val) {
+            this.formData.set('author', val);
+        },
+        'data.year': function dataYear(val) {
+            this.formData.set('year', val);
+        },
+        'data.price': function dataPrice(val) {
+            this.formData.set('price', val);
+        },
+        'data.IBSN': function dataIBSN(val) {
+            this.formData.set('IBSN', val);
         }
     }
-
 });
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(92)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\home\\view-item.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a27d2486", Component.options)
-  } else {
-    hotAPI.reload("data-v-a27d2486", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("navbar"),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-4" }, [_c("category")], 1),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-8" }, [_c("quickitemview")], 1)
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [_c("footers")], 1)
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12", staticStyle: { height: "15px" } })
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a27d2486", module.exports)
-  }
-}
-
-/***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(94)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\home\\item-view.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5cf56fa1", Component.options)
-  } else {
-    hotAPI.reload("data-v-5cf56fa1", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h3", [_vm._v("View this item")])])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5cf56fa1", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
