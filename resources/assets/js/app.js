@@ -14,7 +14,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import VeeValidate from 'vee-validate';
-import VueEventBus from 'vue-event-bus';
+// import VueEventBus from 'vue-event-bus';
 import BootstrapVue from 'bootstrap-vue';
 import VueAuth from '@websanova/vue-auth';
 
@@ -26,7 +26,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate);
-Vue.use(VueEventBus)
+// Vue.use(VueEventBus)
 
 
 /**
